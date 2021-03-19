@@ -1,43 +1,43 @@
 const mongoose = require('mongoose')
 const crypto = require('crypto')
-const uuid = require('uuid/v1')
+const uuidv1 = require('uuid/v1')
 
 const userSchema = new mongoose.Schema({
    name: {
-    tyoe: string,
+    type: String,
     required: true,
     maxLength: 32,
     trim: true
    },
    lastname: {
-       type: string,
+       type: String,
        maxLength: 32,
        trim: true
    },
    email: {
-       type: string,
+       type: String,
        trim: true,
        required: true,
        unique: true
    },
    userinfo: {
-       type: string,
+       type: String,
        trim: true
    },
    encry_password: {
-       type: string,
+       type: String,
        required: true,
    },
-   salt: string,
+   salt: String,
    role: {
-       type: number,
+       type: Number,
        default: 0
    },
    purchases: {
        type: array,
        default: []
    }
-});
+}, {timestamps: true});
 
 userSchema.virtual("password")
     .set(function(password) {
