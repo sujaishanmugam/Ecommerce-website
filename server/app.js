@@ -7,10 +7,11 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-// Routes
+// routes
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
-// DB connection
+//DB Connection
 mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -21,18 +22,18 @@ mongoose
     console.log("DB CONNECTED");
   });
 
-// Middlewares
+//Middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
-// My Routes
+//My Routes
 app.use("/api", authRoutes);
-
-// Port
+app.use("/api", userRoutes);
+//PORT
 const port = process.env.PORT || 8000;
 
-// Starts the Server
+//Starting a server
 app.listen(port, () => {
-  console.log(`App is running at ${port}`);
+  console.log(`app is running at ${port}`);
 });
