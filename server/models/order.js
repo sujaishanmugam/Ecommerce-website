@@ -10,15 +10,20 @@ const ProductCartSchema = new mongoose.Schema({
   count: Number,
   price: Number,
 });
-const ProductCart = mongoose.model("Product", ProductCartSchema);
+
+const ProductCart = mongoose.model("ProductCart", ProductCartSchema);
+
 const OrderSchema = new mongoose.Schema(
   {
     products: [ProductCartSchema],
     transaction_id: {},
-    amount: {
-      type: Number,
-    },
+    amount: { type: Number },
     address: String,
+    status: {
+      type: String,
+      default: "",
+      enum: ["Cancelled", "Delivered", "Shipped", "Processing", "Recieved"],
+    },
     updated: Date,
     user: {
       type: ObjectId,
